@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-import { Main, Card, Button } from "./HomeStyle";
+import { Card, Button, Main } from "./HomeStyle";
 
 function Home () {
   const [ post, setPost ] = useState([]);
@@ -16,6 +16,7 @@ function Home () {
     axios
       .get(`https://blog.apiki.com/wp-json/wp/v2/posts?_embed&categories=518`)
       .then((response) => {
+        
         setPost(response.data);
         setTotalPage(response.headers["x-wp-totalpages"]);
       })
@@ -30,6 +31,7 @@ function Home () {
       axios
         .get(`https://blog.apiki.com/wp-json/wp/v2/posts?_embed&categories=518&page=${page}`)
         .then((response) => {
+          console.log(response.data)
           setTotalPage(response.headers["x-wp-totalpages"]);
           setPost(response.data);
         })
@@ -48,7 +50,7 @@ function Home () {
       {post && post.map((item) => {
         return (
           <Card key={item.id}>
-            <h2>{item.title.rendered}</h2>
+            <h2>{item.yoast_head_json.title}</h2>
             <div>
               <img src={item._embedded["wp:featuredmedia"][0].source_url} alt="" />
             </div>

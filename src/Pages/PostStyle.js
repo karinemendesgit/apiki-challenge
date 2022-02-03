@@ -52,6 +52,9 @@ export const Text = styled.div `
     color: #023047;
     text-decoration: underline;
   }
+  ul {
+    text-align: left;
+  }
 `
 
 export const DivBackButton = styled.div `
